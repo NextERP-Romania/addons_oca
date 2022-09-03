@@ -14,7 +14,7 @@
     ],
     # odoo_test_helper is needed for the tests
     "data": [
-        "data/ir_cron_data.xml",
+        # "data/ir_cron_data.xml",
         "security/ir.model.access.csv",
         "security/date_range_security.xml",
         "views/assets.xml",
