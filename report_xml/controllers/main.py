@@ -32,7 +32,7 @@ class ReportController(report.ReportController):
                     del data["context"]["lang"]
                 context.update(data["context"])
 
-            xml = report.with_context(context)._render_qweb_xml(docids, data=data)[0]
+            xml = report.with_context(**context)._render_qweb_xml(docids, data=data)[0]
             xmlhttpheaders = [
                 ("Content-Type", "text/xml"),
                 ("Content-Length", len(xml)),
@@ -42,7 +42,7 @@ class ReportController(report.ReportController):
             return super().report_routes(reportname, docids, converter, **data)
 
     @route()
-    def report_download(self, data, token, context=None):
+    def report_download(self, data, context=None):
         requestcontent = json.loads(data)
         url, report_type = requestcontent[0], requestcontent[1]
         if report_type == "qweb-xml":
@@ -56,7 +56,10 @@ class ReportController(report.ReportController):
                 if docids:
                     # Generic report:
                     response = self.report_routes(
-                        reportname, docids=docids, converter="xml", context=context
+                        reportname,
+                        docids=docids,
+                        converter="xml",
+                        context=context,
                     )
                 else:
                     # Particular report:
@@ -85,11 +88,10 @@ class ReportController(report.ReportController):
                 response.headers.add(
                     "Content-Disposition", content_disposition(filename)
                 )
-                response.set_cookie("fileToken", token)
                 return response
             except Exception as e:
                 se = serialize_exception(e)
                 error = {"code": 200, "message": "Odoo Server Error", "data": se}
                 return request.make_response(html_escape(json.dumps(error)))
         else:
-            return super().report_download(data, token, context)
+            return super().report_download(data, context)
