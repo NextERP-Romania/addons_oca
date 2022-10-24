@@ -91,4 +91,4 @@ class SaleOrder(models.Model):
 
     @api.model
     def _get_popup_action(self):
-        return self.env.ref("sale_exception.action_sale_exception_confirm")
+        return self.env.ref("sale_exception.action_sale_exception_confirm").sudo()
