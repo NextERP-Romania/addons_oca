@@ -96,18 +96,19 @@ class BaseExceptionMethod(models.AbstractModel):
             records_with_exception = self._detect_exceptions(rule)
             reverse_field = self._reverse_field()
             main_records = self._get_main_records()
-            commons = main_records & rule[reverse_field]
-            to_remove = commons - records_with_exception
-            to_add = records_with_exception - commons
-            # we expect to always work on the same model type
-            if rule.id not in rules_to_remove:
-                rules_to_remove[rule.id] = main_records.browse()
-            rules_to_remove[rule.id] |= to_remove
-            if rule.id not in rules_to_add:
-                rules_to_add[rule.id] = main_records.browse()
-            rules_to_add[rule.id] |= to_add
-            if records_with_exception:
-                all_exception_ids.append(rule.id)
+            if main_records and rule[reverse_field]:
+                commons = main_records & rule[reverse_field]
+                to_remove = commons - records_with_exception
+                to_add = records_with_exception - commons
+                # we expect to always work on the same model type
+                if rule.id not in rules_to_remove:
+                    rules_to_remove[rule.id] = main_records.browse()
+                rules_to_remove[rule.id] |= to_remove
+                if rule.id not in rules_to_add:
+                    rules_to_add[rule.id] = main_records.browse()
+                rules_to_add[rule.id] |= to_add
+                if records_with_exception:
+                    all_exception_ids.append(rule.id)
         # Cumulate all the records to attach to the rule
         # before linking. We don't want to call "rule.write()"
         # which would:
