@@ -51,8 +51,29 @@
                     groups='base_exception.group_exception_rule_manager'
                 />
             </xpath>
-            <xpath expr="//field[@name='company_id']" position="after">
-                <field name="exception_ids" widget="many2many_tags" readonly="True" />
+            <xpath expr="//field[@name='order_line']/tree" position="before">
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('exceptions_summary', '=', False)]}"
+                >
+                    <p>
+                        <strong
+                        >There are exceptions on this line blocking the confirmation of this quotation:</strong>
+                    </p>
+                    <field name="exceptions_summary" />
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
+                <field name="exception_ids"/>
+                <field name="ignore_exception"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute
+                    name="decoration-danger"
+                >not ignore_exception and exception_ids</attribute>
             </xpath>
         </field>
     </record>

@@ -53,5 +53,5 @@ class PurchaseOrder(models.Model):
 
     @api.model
     def _get_popup_action(self):
-        action = self.env.ref("purchase_exception.action_purchase_exception_confirm")
+        action = self.env.ref("purchase_exception.action_purchase_exception_confirm").sudo()
         return action

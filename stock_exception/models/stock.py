@@ -45,5 +45,5 @@ class StockPicking(models.Model):
 
     @api.model
     def _get_popup_action(self):
-        action = self.env.ref("stock_exception.action_stock_exception_confirm")
+        action = self.env.ref("stock_exception.action_stock_exception_confirm").sudo()
         return action
