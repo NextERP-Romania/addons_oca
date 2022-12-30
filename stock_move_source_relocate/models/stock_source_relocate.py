@@ -51,15 +51,15 @@ class StockSourceRelocate(models.Model):
     )
     rule_message = fields.Html(compute="_compute_rule_message")
 
-    # @api.constrains("relocate_location_id")
-    # def _constraint_relocate_location_id(self):
-    #     """The relocate location has to be a child of the main location."""
-    #     for rule in self:
-    #         if not rule.relocate_location_id.is_sublocation_of(rule.location_id):
-    #             msg = _("Relocate location has to be a sub-location of '{}'.").format(
-    #                 rule.location_id.display_name
-    #             )
-    #             raise ValidationError(msg)
+    @api.constrains("relocate_location_id")
+    def _constraint_relocate_location_id(self):
+        """The relocate location has to be a child of the main location."""
+        for rule in self:
+            if not rule.relocate_location_id.is_sublocation_of(rule.location_id):
+                msg = _("Relocate location has to be a sub-location of '{}'.").format(
+                    rule.location_id.display_name
+                )
+                raise ValidationError(msg)
 
     def _rule_message_template(self):
         message = _(
