@@ -43,6 +43,11 @@ class StockPicking(models.Model):
             return self._popup_exceptions()
         return super().action_confirm()
 
+    def button_validate(self):
+        if self.detect_exceptions() and not self.ignore_exception:
+            return self._popup_exceptions()
+        return super().button_validate()
+
     @api.model
     def _get_popup_action(self):
         action = self.env.ref("stock_exception.action_stock_exception_confirm").sudo()

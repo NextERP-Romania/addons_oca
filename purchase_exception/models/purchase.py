@@ -31,6 +31,8 @@ class PurchaseOrder(models.Model):
     def purchase_check_exception(self):
         orders = self.filtered(lambda s: s.state == "purchase")
         if orders:
+            if orders.detect_exceptions() and not orders.ignore_exception:
+                return orders._popup_exceptions()
             orders._check_exception()
 
     @api.onchange("order_line")
