@@ -65,8 +65,8 @@
                 </div>
             </xpath>
             <xpath expr="//field[@name='order_line']/tree" position="inside">
-                <field name="exception_ids" />
-                <field name="ignore_exception"/>
+                <field name="exception_ids" invisible="1" />
+                <field name="ignore_exception" invisible="1" />
             </xpath>
             <xpath expr="//field[@name='order_line']/tree" position="attributes">
                 <attribute

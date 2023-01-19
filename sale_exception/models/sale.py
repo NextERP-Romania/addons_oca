@@ -69,11 +69,6 @@ class SaleOrder(models.Model):
         if orders:
             orders._check_exception()
 
-    @api.onchange("order_line")
-    def onchange_ignore_exception(self):
-        if self.state == "sale":
-            self.ignore_exception = False
-
     def action_confirm(self):
         if self.detect_exceptions():
             return self._popup_exceptions()
@@ -91,4 +86,4 @@ class SaleOrder(models.Model):
 
     @api.model
     def _get_popup_action(self):
-        return self.env.ref("sale_exception.action_sale_exception_confirm").sudo()
+        return self.env.ref("sale_exception.action_sale_exception_confirm")

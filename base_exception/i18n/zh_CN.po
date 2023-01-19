@@ -21,14 +21,15 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: base_exception
-#: model_terms:ir.ui.view,arch_db:base_exception.view_exception_rule_form
-msgid "<code>self</code>: Record on which the rule is evaluated."
-msgstr "<code>self</code>: 记录对规则求值的位置。"
+#: code:addons/base_exception/models/base_exception.py:0
+#, python-format
+msgid "(Blocking exception)"
+msgstr ""
 
 #. module: base_exception
 #: model_terms:ir.ui.view,arch_db:base_exception.view_exception_rule_form
-msgid "<code>time</code>: useful Python libraries"
-msgstr "<code>time</code>: 有用的Python库"
+msgid "<code>self</code>: Record on which the rule is evaluated."
+msgstr "<code>self</code>: 记录对规则求值的位置。"
 
 #. module: base_exception
 #: model:ir.model.fields,field_description:base_exception.field_exception_rule__active
@@ -46,9 +47,19 @@ msgid "Archived"
 msgstr ""
 
 #. module: base_exception
+#: model_terms:ir.ui.view,arch_db:base_exception.view_exception_rule_form
+msgid "As well as all the libraries provided in safe_eval."
+msgstr ""
+
+#. module: base_exception
 #: model:ir.model.fields.selection,name:base_exception.selection__exception_rule__exception_type__by_domain
 msgid "By domain"
 msgstr "通过域"
+
+#. module: base_exception
+#: model:ir.model.fields.selection,name:base_exception.selection__exception_rule__exception_type__by_method
+msgid "By method"
+msgstr ""
 
 #. module: base_exception
 #: model:ir.model.fields.selection,name:base_exception.selection__exception_rule__exception_type__by_py_code
@@ -60,12 +71,10 @@ msgstr "通过python代码"
 msgid ""
 "By python code: allow to define any arbitrary check\n"
 "By domain: limited to a selection by an odoo domain:\n"
-"           performance can be better when exceptions            are "
-"evaluated with several records"
+"           performance can be better when exceptions           are evaluated "
+"with several records\n"
+"By method: allow to select an existing check method"
 msgstr ""
-"通过python代码：允许定义任意检查\n"
-"通过域: 仅限于odoo域的选择:\n"
-"           在评估异常情况时           可以使用几种记录来改进性能"
 
 #. module: base_exception
 #: model:ir.model.fields,field_description:base_exception.field_base_exception__changeset_change_ids
@@ -245,6 +254,11 @@ msgid "Ignore Exceptions"
 msgstr "忽略异常"
 
 #. module: base_exception
+#: model:ir.model.fields,field_description:base_exception.field_exception_rule__is_blocking
+msgid "Is blocking"
+msgstr ""
+
+#. module: base_exception
 #: model:ir.model.fields,field_description:base_exception.field_base_exception____last_update
 #: model:ir.model.fields,field_description:base_exception.field_base_exception_method____last_update
 #: model:ir.model.fields,field_description:base_exception.field_exception_rule____last_update
@@ -266,6 +280,11 @@ msgstr "最后更新时间"
 #: model:ir.model.fields,field_description:base_exception.field_base_exception__main_exception_id
 msgid "Main Exception"
 msgstr "主要异常"
+
+#. module: base_exception
+#: model:ir.model.fields,field_description:base_exception.field_exception_rule__method
+msgid "Method"
+msgstr ""
 
 #. module: base_exception
 #: code:addons/base_exception/wizard/base_exception_confirm.py:0
@@ -307,12 +326,26 @@ msgid "Sequence"
 msgstr "序列"
 
 #. module: base_exception
+#: model:ir.model.fields,field_description:base_exception.field_base_exception__smart_search
+#: model:ir.model.fields,field_description:base_exception.field_base_exception_method__smart_search
+#: model:ir.model.fields,field_description:base_exception.field_exception_rule__smart_search
+#: model:ir.model.fields,field_description:base_exception.field_exception_rule_confirm__smart_search
+msgid "Smart Search"
+msgstr ""
+
+#. module: base_exception
+#: code:addons/base_exception/models/base_exception.py:0
+#, python-format
+msgid "The exceptions can not be ignored, because some of them are blocking."
+msgstr ""
+
+#. module: base_exception
 #: code:addons/base_exception/models/base_exception.py:0
 #, python-format
 msgid ""
-"There is a problem of configuration, python code or domain is missing to "
-"match the exception type."
-msgstr "存在配置问题，缺少python代码或域以匹配异常类型。"
+"There is a problem of configuration, python code, domain or method is "
+"missing to match the exception type."
+msgstr ""
 
 #. module: base_exception
 #: model_terms:ir.ui.view,arch_db:base_exception.view_exception_rule_form
@@ -335,6 +368,29 @@ msgid ""
 msgstr "各种字段可能使用Python代码或Python表达式。可以使用以下变量："
 
 #. module: base_exception
+#: model:ir.model.fields,help:base_exception.field_exception_rule__is_blocking
+msgid "When checked the exception can not be ignored"
+msgstr ""
+
+#. module: base_exception
 #: model_terms:ir.ui.view,arch_db:base_exception.view_exception_rule_confirm
 msgid "_Close"
 msgstr "关闭"
+
+#~ msgid ""
+#~ "By python code: allow to define any arbitrary check\n"
+#~ "By domain: limited to a selection by an odoo domain:\n"
+#~ "           performance can be better when exceptions            are "
+#~ "evaluated with several records"
+#~ msgstr ""
+#~ "通过python代码：允许定义任意检查\n"
+#~ "通过域: 仅限于odoo域的选择:\n"
+#~ "           在评估异常情况时           可以使用几种记录来改进性能"
+
+#~ msgid ""
+#~ "There is a problem of configuration, python code or domain is missing to "
+#~ "match the exception type."
+#~ msgstr "存在配置问题，缺少python代码或域以匹配异常类型。"
+
+#~ msgid "<code>time</code>: useful Python libraries"
+#~ msgstr "<code>time</code>: 有用的Python库"
