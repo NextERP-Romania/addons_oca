@@ -196,6 +196,7 @@ msgstr ""
 
 #. module: base_comment_template
 #: model:ir.model,name:base_comment_template.model_ir_model
+#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__models
 msgid "Models"
 msgstr ""
 
@@ -254,6 +255,12 @@ msgstr ""
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__sequence
 msgid "Sequence"
+msgstr ""
+
+#. module: base_comment_template
+#: code:addons/base_comment_template/models/base_comment_template.py:0
+#, python-format
+msgid "Some model (%s) not found"
 msgstr ""
 
 #. module: base_comment_template
