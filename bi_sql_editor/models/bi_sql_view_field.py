@@ -206,7 +206,6 @@ class BiSQLViewField(models.Model):
                 keys_to_pop.append(field.name)
             else:
                 res.update({field.name: field.relation})
-
         for key in list(set(keys_to_pop)):
             res.pop(key)
 

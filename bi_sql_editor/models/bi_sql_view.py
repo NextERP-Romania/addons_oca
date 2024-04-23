@@ -11,7 +11,6 @@ from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import sql, table_columns
 from odoo.tools.safe_eval import safe_eval
-
 _logger = logging.getLogger(__name__)
 
 
