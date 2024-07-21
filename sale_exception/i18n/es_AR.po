@@ -11,8 +11,7 @@ msgstr ""
 "POT-Creation-Date: 2017-05-13 01:19+0000\n"
 "PO-Revision-Date: 2017-05-13 01:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
-"teams/23907/es_AR/)\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,8 +21,8 @@ msgstr ""
 #. module: sale_exception
 #: model_terms:ir.ui.view,arch_db:sale_exception.view_order_form
 msgid ""
-"<strong>There are exceptions blocking the confirmation of this Sale Order:</"
-"strong>"
+"<strong>There are exceptions blocking the confirmation of this Sale "
+"Order:</strong>"
 msgstr ""
 
 #. module: sale_exception
@@ -92,10 +91,7 @@ msgid "Customer sale warning"
 msgstr ""
 
 #. module: sale_exception
-#: model:ir.model.fields,field_description:sale_exception.field_exception_rule__display_name
 #: model:ir.model.fields,field_description:sale_exception.field_sale_exception_confirm__display_name
-#: model:ir.model.fields,field_description:sale_exception.field_sale_order__display_name
-#: model:ir.model.fields,field_description:sale_exception.field_sale_order_line__display_name
 msgid "Display Name"
 msgstr "Mostrar Nombre"
 
@@ -122,12 +118,9 @@ msgid "Exceptions to resolve"
 msgstr ""
 
 #. module: sale_exception
-#: model:ir.model.fields,field_description:sale_exception.field_exception_rule__id
 #: model:ir.model.fields,field_description:sale_exception.field_sale_exception_confirm__id
-#: model:ir.model.fields,field_description:sale_exception.field_sale_order__id
-#: model:ir.model.fields,field_description:sale_exception.field_sale_order_line__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: sale_exception
 #: model:ir.model.fields,field_description:sale_exception.field_sale_exception_confirm__ignore
@@ -138,10 +131,12 @@ msgid "Ignore Exceptions"
 msgstr ""
 
 #. module: sale_exception
-#: model:ir.model.fields,field_description:sale_exception.field_exception_rule____last_update
+#: model:ir.model.fields,field_description:sale_exception.field_sale_order_line__is_exception_danger
+msgid "Is Exception Danger"
+msgstr ""
+
+#. module: sale_exception
 #: model:ir.model.fields,field_description:sale_exception.field_sale_exception_confirm____last_update
-#: model:ir.model.fields,field_description:sale_exception.field_sale_order____last_update
-#: model:ir.model.fields,field_description:sale_exception.field_sale_order_line____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -204,11 +199,6 @@ msgid "Sale Exception Rules"
 msgstr ""
 
 #. module: sale_exception
-#: model_terms:ir.ui.view,arch_db:sale_exception.view_sale_exception_confirm
-msgid "Sale Exceptions"
-msgstr ""
-
-#. module: sale_exception
 #: model:ir.model,name:sale_exception.model_sale_exception_confirm
 msgid "Sale exception confirm wizard"
 msgstr ""
@@ -241,7 +231,6 @@ msgstr ""
 #. module: sale_exception
 #: model:ir.actions.server,name:sale_exception.ir_cron_test_orders_ir_actions_server
 #: model:ir.cron,cron_name:sale_exception.ir_cron_test_orders
-#: model:ir.cron,name:sale_exception.ir_cron_test_orders
 msgid "Test Draft Orders"
 msgstr ""
 

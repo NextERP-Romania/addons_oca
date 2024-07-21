@@ -69,9 +69,6 @@ class PurchaseTest(models.Model):
     def button_cancel(self):
         self.write({"state": "cancel"})
 
-    def _reverse_field(self):
-        return "test_purchase_ids"
-
     def exception_method_no_zip(self):
         records_fail = self.env["base.exception.test.purchase"]
         for rec in self:
@@ -88,3 +85,17 @@ class LineTest(models.Model):
     lead_id = fields.Many2one("base.exception.test.purchase", ondelete="cascade")
     qty = fields.Float()
     amount = fields.Float()
+
+
+class WizardTest(models.TransientModel):
+    _name = "exception.rule.confirm.test.purchase"
+    _inherit = "exception.rule.confirm"
+    _description = "Base Exception Test Model Confirm"
+
+    related_model_id = fields.Many2one("base.exception.test.purchase", "Purchase")
+
+    def action_confirm(self):
+        self.ensure_one()
+        if self.ignore:
+            self.related_model_id.ignore_exception = True
+        return super().action_confirm()

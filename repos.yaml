@@ -1,0 +1,191 @@
+./account-analytic:
+    remotes:
+        oca: git@github.com:OCA/account-analytic.git
+        nexterp: git@github.com:NextERP-Romania/account-invoicing.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./account-invoicing:
+    remotes:
+        oca: git@github.com:OCA/account-invoicing.git
+        nexterp: git@github.com:NextERP-Romania/account-invoicing.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./account-invoice-reporting:
+    remotes:
+        oca: git@github.com:OCA/account-invoice-reporting.git
+        nexterp: git@github.com:NextERP-Romania/account-invoice-reporting.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./account-financial-reporting:
+    remotes:
+        oca: git@github.com:OCA/account-financial-reporting.git
+        nexterp: git@github.com:NextERP-Romania/account-financial-reporting.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./account-reconcile:
+    remotes:
+        oca: git@github.com:OCA/account-reconcile.git
+        nexterp: git@github.com:NextERP-Romania/account-reconcile.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./bank-statement-import:
+    remotes:
+        oca: git@github.com:OCA/bank-statement-import.git
+        nexterp: git@github.com:NextERP-Romania/bank-statement-import.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./brand:
+    remotes:
+        oca: git@github.com:OCA/brand.git
+        nexterp: git@github.com:NextERP-Romania/brand.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./commission:
+    remotes:
+        oca: git@github.com:OCA/commission.git
+        nexterp: git@github.com:NextERP-Romania/commission.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./currency:
+    remotes:
+        oca: git@github.com:OCA/currency.git
+        nexterp: git@github.com:NextERP-Romania/currency.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./delivery-carrier:
+    remotes:
+        oca: git@github.com:OCA/delivery-carrier.git
+        nexterp: git@github.com:NextERP-Romania/delivery-carrier.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./hr:
+    remotes:
+        oca: git@github.com:OCA/hr.git
+        nexterp: git@github.com:NextERP-Romania/hr.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./margin-analysis:
+    remotes:
+        oca: git@github.com:OCA/margin-analysis.git
+        nexterp: git@github.com:NextERP-Romania/margin-analysis.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./partner-contact:
+    remotes:
+        oca: git@github.com:OCA/partner-contact.git
+        nexterp: git@github.com:NextERP-Romania/partner-contact.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./product-attribute:
+    remotes:
+        oca: git@github.com:OCA/product-attribute.git
+        nexterp: git@github.com:NextERP-Romania/product-attribute.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./purchase-workflow:
+    remotes:
+        oca: git@github.com:OCA/purchase-workflow.git
+        nexterp: git@github.com:NextERP-Romania/purchase-workflow.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./reporting-engine:
+    remotes:
+        oca: git@github.com:OCA/reporting-engine.git
+        nexterp: git@github.com:NextERP-Romania/reporting-engine.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./sale-workflow:
+    remotes:
+        oca: git@github.com:OCA/sale-workflow.git
+        nexterp: git@github.com:NextERP-Romania/sale-workflow.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./server-brand:
+    remotes:
+        oca: git@github.com:OCA/server-brand.git
+        nexterp: git@github.com:NextERP-Romania/server-brand.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./server-tools:
+    remotes:
+        oca: git@github.com:OCA/server-tools.git
+        nexterp: git@github.com:NextERP-Romania/server-tools.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./server-ux:
+    remotes:
+        oca: git@github.com:OCA/server-ux.git
+        nexterp: git@github.com:NextERP-Romania/server-ux.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./social:
+    remotes:
+        oca: git@github.com:OCA/social.git
+        nexterp: git@github.com:NextERP-Romania/social.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./stock-logistics-warehouse:
+    remotes:
+        oca: git@github.com:OCA/stock-logistics-warehouse.git
+        nexterp: git@github.com:NextERP-Romania/stock-logistics-warehouse.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./stock-logistics-workflow:
+    remotes:
+        oca: git@github.com:OCA/stock-logistics-workflow.git
+        nexterp: git@github.com:NextERP-Romania/stock-logistics-workflow.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0
+
+./web:
+    remotes:
+        oca: git@github.com:OCA/web.git
+        nexterp: git@github.com:NextERP-Romania/web.git
+    merges:
+        - oca 17.0
+    target: nexterp 17.0

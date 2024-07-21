@@ -27,6 +27,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_brand.field_sale_report__product_brand_id
 #: model_terms:ir.ui.view,arch_db:product_brand.product_template_form_brand_add
 #: model_terms:ir.ui.view,arch_db:product_brand.view_account_invoice_report_search
+#: model_terms:ir.ui.view,arch_db:product_brand.view_order_product_search
 #: model_terms:ir.ui.view,arch_db:product_brand.view_product_template_search_brand
 msgid "Brand"
 msgstr "Marke"
@@ -60,18 +61,12 @@ msgid "Description"
 msgstr "Beschreibung"
 
 #. module: product_brand
-#: model:ir.model.fields,field_description:product_brand.field_account_invoice_report__display_name
 #: model:ir.model.fields,field_description:product_brand.field_product_brand__display_name
-#: model:ir.model.fields,field_description:product_brand.field_product_template__display_name
-#: model:ir.model.fields,field_description:product_brand.field_sale_report__display_name
 msgid "Display Name"
 msgstr "Anzeigename"
 
 #. module: product_brand
-#: model:ir.model.fields,field_description:product_brand.field_account_invoice_report__id
 #: model:ir.model.fields,field_description:product_brand.field_product_brand__id
-#: model:ir.model.fields,field_description:product_brand.field_product_template__id
-#: model:ir.model.fields,field_description:product_brand.field_sale_report__id
 msgid "ID"
 msgstr "ID"
 
@@ -79,14 +74,6 @@ msgstr "ID"
 #: model:ir.model,name:product_brand.model_account_invoice_report
 msgid "Invoices Statistics"
 msgstr ""
-
-#. module: product_brand
-#: model:ir.model.fields,field_description:product_brand.field_account_invoice_report____last_update
-#: model:ir.model.fields,field_description:product_brand.field_product_brand____last_update
-#: model:ir.model.fields,field_description:product_brand.field_product_template____last_update
-#: model:ir.model.fields,field_description:product_brand.field_sale_report____last_update
-msgid "Last Modified on"
-msgstr "Zuletzt bearbeitet am"
 
 #. module: product_brand
 #: model:ir.model.fields,field_description:product_brand.field_product_brand__write_uid
@@ -120,10 +107,14 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: product_brand
+#: model:ir.model,name:product_brand.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: product_brand
 #: model:ir.actions.act_window,name:product_brand.action_open_single_product_brand
 #: model:ir.model,name:product_brand.model_product_brand
 #: model_terms:ir.ui.view,arch_db:product_brand.product_brand_search_form_view
-#: model_terms:ir.ui.view,arch_db:product_brand.view_order_product_search
 msgid "Product Brand"
 msgstr "Produktmarke"
 
@@ -131,11 +122,6 @@ msgstr "Produktmarke"
 #: model:ir.ui.menu,name:product_brand.menu_product_brand
 msgid "Product Brands"
 msgstr "Produktmarken"
-
-#. module: product_brand
-#: model:ir.model,name:product_brand.model_product_template
-msgid "Product Template"
-msgstr "Produktvorlage"
 
 #. module: product_brand
 #: model_terms:ir.ui.view,arch_db:product_brand.view_product_brand_form
@@ -159,7 +145,11 @@ msgstr "Wähle eine Marke für dieses Produkt"
 msgid "Select a partner for this brand if any."
 msgstr "Falls vorhanden wähle einen Partner für diese Marke."
 
-#. module: product_brand
-#: model_terms:ir.ui.view,arch_db:product_brand.view_product_brand_tree
-msgid "product.brand"
-msgstr "product.brand"
+#~ msgid "Last Modified on"
+#~ msgstr "Zuletzt bearbeitet am"
+
+#~ msgid "Product Template"
+#~ msgstr "Produktvorlage"
+
+#~ msgid "product.brand"
+#~ msgstr "product.brand"

@@ -4,15 +4,21 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from odoo import Command
 from odoo.exceptions import ValidationError
-from odoo.tests import Form, SavepointCase
+from odoo.tests import Form, TransactionCase
 
 
-class TestSaleException(SavepointCase):
+class TestSaleException(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.default_pl = cls.env["product.pricelist"].create(
+            {
+                "name": "Public Pricelist",
+            }
+        )
 
     def test_sale_order_exception(self):
         self.sale_exception_confirm = self.env["sale.exception.confirm"]
@@ -29,9 +35,7 @@ class TestSaleException(SavepointCase):
                 "partner_invoice_id": partner.id,
                 "partner_shipping_id": partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": p.name,
                             "product_id": p.id,
@@ -41,7 +45,7 @@ class TestSaleException(SavepointCase):
                         },
                     )
                 ],
-                "pricelist_id": self.env.ref("product.list0").id,
+                "pricelist_id": self.default_pl.id,
             }
         )
 
@@ -59,9 +63,7 @@ class TestSaleException(SavepointCase):
                 "partner_invoice_id": partner.id,
                 "partner_shipping_id": partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": p.name,
                             "product_id": p.id,
@@ -71,7 +73,7 @@ class TestSaleException(SavepointCase):
                         },
                     )
                 ],
-                "pricelist_id": self.env.ref("product.list0").id,
+                "pricelist_id": self.default_pl.id,
             }
         )
         self.env["sale.order"].test_all_draft_orders()
@@ -91,9 +93,7 @@ class TestSaleException(SavepointCase):
             {
                 "ignore_exception": False,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": p.name,
                             "product_id": p.id,
@@ -113,9 +113,7 @@ class TestSaleException(SavepointCase):
             {
                 "ignore_exception": True,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": p.name,
                             "product_id": p.id,
@@ -135,7 +133,7 @@ class TestSaleException(SavepointCase):
         # Simulation the opening of the wizard sale_exception_confirm and
         # set ignore_exception to True
         so_except_confirm = self.sale_exception_confirm.with_context(
-            {"active_id": so1.id, "active_ids": [so1.id], "active_model": so1._name}
+            **{"active_id": so1.id, "active_ids": [so1.id], "active_model": so1._name}
         ).create({"ignore": True})
         so_except_confirm.action_confirm()
         self.assertTrue(so1.ignore_exception)
@@ -172,3 +170,42 @@ class TestSaleException(SavepointCase):
         sale_order2 = sale_order.copy()
         sale_order2.detect_exceptions()
         self.assertTrue(sale_order2.exception_ids.filtered(lambda x: x == exception))
+
+    def test_exception_no_free(self):
+        # No allow ignoring exceptions if the "is_blocking" field is checked
+        self.sale_exception_confirm = self.env["sale.exception.confirm"]
+        exception = self.env.ref("sale_exception.excep_no_free")
+        exception.active = True
+        exception.is_blocking = True
+        partner = self.env.ref("base.res_partner_1")
+        p = self.env.ref("product.product_product_6")
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": partner.id,
+                "partner_invoice_id": partner.id,
+                "partner_shipping_id": partner.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "name": p.name,
+                            "product_id": p.id,
+                            "product_uom_qty": 2,
+                            "product_uom": p.uom_id.id,
+                            "price_unit": 0,
+                        },
+                    )
+                ],
+            }
+        )
+        sale_order.action_confirm()
+        so_except_confirm = self.sale_exception_confirm.with_context(
+            **{
+                "active_id": sale_order.id,
+                "active_ids": [sale_order.id],
+                "exception_ids": [exception.id],
+                "active_model": sale_order._name,
+            }
+        ).create({"ignore": True})
+        so_except_confirm.action_confirm()
+        self.assertFalse(sale_order.ignore_exception)
+        self.assertTrue(sale_order.state == "draft")

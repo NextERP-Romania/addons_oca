@@ -3,6 +3,8 @@
 
 from odoo.tests.common import TransactionCase, tagged
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 from ..hooks import pre_init_hook
 
 
@@ -10,11 +12,13 @@ from ..hooks import pre_init_hook
 class TestProductSequence(TransactionCase):
     """Tests for creating product with and without Product Sequence"""
 
-    def setUp(self):
-        super(TestProductSequence, self).setUp()
-        self.product_product = self.env["product.product"]
-        self.product_category = self.env["product.category"]
-        self.product_template = self.env["product.template"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.product_product = cls.env["product.product"]
+        cls.product_category = cls.env["product.category"]
+        cls.product_template = cls.env["product.template"].create(
             {"name": "Demo Product"}
         )
 
@@ -28,13 +32,13 @@ class TestProductSequence(TransactionCase):
 
     def test_product_create_without_default_code(self):
         product_1 = self.product_product.create(dict(name="Orange", default_code="/"))
-        self.assertRegexpMatches(str(product_1.default_code), r"PR/*")
+        self.assertRegex(str(product_1.default_code), r"PR/*")
 
     def test_product_copy(self):
         product_2 = self.product_template.create(
             dict(name="Apple", default_code="PROD02")
         )
-        product_2.flush()
+        product_2.flush_recordset()
         copy_product_2 = product_2.product_variant_id.copy()
         self.assertEqual(copy_product_2.default_code, "PROD02-copy")
 
@@ -46,11 +50,11 @@ class TestProductSequence(TransactionCase):
             "update product_product set default_code='/' where id=%s",
             (tuple(product_3.ids),),
         )
-        product_3.invalidate_cache()
+        product_3.invalidate_recordset()
         self.assertEqual(product_3.default_code, "/")
-        pre_init_hook(self.cr)
-        product_3.invalidate_cache()
-        self.assertEqual(product_3.default_code, "!!mig!!{}".format(product_3.id))
+        pre_init_hook(self.env)
+        product_3.invalidate_recordset()
+        self.assertEqual(product_3.default_code, f"!!mig!!{product_3.id}")
 
     def test_product_category_sequence(self):
         categ_grocery = self.product_category.create(
@@ -80,7 +84,7 @@ class TestProductSequence(TransactionCase):
         categ_car = self.product_category.create(dict(name="Car", code_prefix="CAR"))
         product_3.product_tmpl_id.categ_id = categ_car
         product_3.product_tmpl_id.default_code = "/"
-        product_3.refresh()
+        product_3.invalidate_recordset()
         self.assertEqual(product_3.default_code[:3], "CAR")
         self.assertEqual(product_3.product_tmpl_id.default_code[:3], "CAR")
         categ_car.write(dict(name="Bike", code_prefix="BIK"))
@@ -89,11 +93,45 @@ class TestProductSequence(TransactionCase):
         categ_car.write({"code_prefix": "KIA"})
         self.assertEqual(categ_car.sequence_id.prefix, "KIA")
 
+    def test_product_parent_category_sequence(self):
+        parent_categ = self.product_category.create(
+            dict(
+                name="Parents",
+                code_prefix="PAR",
+            )
+        )
+        categ = self.product_category.create(
+            dict(
+                name="Child",
+                parent_id=parent_categ.id,
+            )
+        )
+
+        product_anna = self.product_product.create(
+            dict(
+                name="Anna",
+                categ_id=categ.id,
+            )
+        )
+        self.assertEqual(product_anna.default_code[:2], "PR")
+        self.assertEqual(product_anna.product_tmpl_id.default_code[:2], "PR")
+
+        self.env.user.company_id.use_parent_categories_to_determine_prefix = True
+
+        product_claudia = self.product_product.create(
+            dict(
+                name="Claudia",
+                categ_id=categ.id,
+            )
+        )
+        self.assertEqual(product_claudia.default_code[:3], "PAR")
+        self.assertEqual(product_claudia.product_tmpl_id.default_code[:3], "PAR")
+
     def test_product_copy_with_default_values(self):
         product_2 = self.product_template.create(
             dict(name="Apple", default_code="PROD02")
         )
-        product_2.flush()
+        product_2.flush_recordset()
         copy_product_2 = product_2.product_variant_id.copy(
             {"default_code": "product test sequence"}
         )

@@ -9,25 +9,36 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-23 17:50+0000\n"
-"PO-Revision-Date: 2022-08-12 17:07+0000\n"
-"Last-Translator: Khalid Hazam <k.hazam@badep.ma>\n"
+"PO-Revision-Date: 2018-02-23 17:50+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: purchase_exception
+#: model_terms:ir.ui.view,arch_db:purchase_exception.view_order_form
+msgid "<strong>There are exceptions blocking this Purchase Order:</strong>"
+msgstr ""
 
 #. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_exception_rule__model
 msgid "Apply on"
-msgstr "Appliquer sur"
+msgstr ""
 
 #. module: purchase_exception
 #: model_terms:ir.ui.view,arch_db:purchase_exception.view_purchase_order_filter
+#, fuzzy
 msgid "Blocked in Draft"
-msgstr "Bloqué en brouillon"
+msgstr "Bloquée en brouillon"
+
+#. module: purchase_exception
+#: model_terms:ir.ui.view,arch_db:purchase_exception.view_order_form
+msgid ""
+"Click here to be able to confirm this Agreement regardless of the exceptions."
+msgstr ""
 
 #. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm__create_uid
@@ -46,18 +57,25 @@ msgstr "Nom affiché"
 
 #. module: purchase_exception
 #: model:ir.model,name:purchase_exception.model_exception_rule
+#, fuzzy
 msgid "Exception Rule"
-msgstr "Règle de l'exception"
+msgstr "Règles d'exception"
 
 #. module: purchase_exception
-#: model:ir.ui.menu,name:purchase_exception.menu_purchase_exception_parent
+#: model:ir.model.fields,field_description:purchase_exception.field_purchase_order__exception_ids
 msgid "Exceptions"
 msgstr "Exceptions"
 
 #. module: purchase_exception
+#: model:ir.model.fields,field_description:purchase_exception.field_purchase_order__exceptions_summary
+msgid "Exceptions Summary"
+msgstr ""
+
+#. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm__exception_ids
+#, fuzzy
 msgid "Exceptions to resolve"
-msgstr "Exceptions à régler"
+msgstr "Règles d'exception"
 
 #. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm__id
@@ -66,14 +84,12 @@ msgstr "ID"
 
 #. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm__ignore
+#: model:ir.model.fields,field_description:purchase_exception.field_purchase_order__ignore_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_order_line__ignore_exception
+#: model_terms:ir.ui.view,arch_db:purchase_exception.view_order_form
+#, fuzzy
 msgid "Ignore Exceptions"
-msgstr "Ignorer les exceptions"
-
-#. module: purchase_exception
-#: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr "Exceptions"
 
 #. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm__write_uid
@@ -84,6 +100,11 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:purchase_exception.field_purchase_exception_confirm__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
+
+#. module: purchase_exception
+#: model:ir.model.fields,field_description:purchase_exception.field_purchase_order__main_exception_id
+msgid "Main Exception"
+msgstr ""
 
 #. module: purchase_exception
 #: model:exception.rule,description:purchase_exception.po_excep_no_email
@@ -118,14 +139,14 @@ msgstr "Commande"
 
 #. module: purchase_exception
 #: model:ir.model,name:purchase_exception.model_purchase_order_line
+#, fuzzy
 msgid "Purchase Order Line"
-msgstr "Ligne de commande"
+msgstr "Commande"
 
 #. module: purchase_exception
 #: model:ir.model,name:purchase_exception.model_purchase_exception_confirm
-#, fuzzy
 msgid "Purchase exception wizard"
-msgstr "Wizard d'exception d'achat"
+msgstr ""
 
 #. module: purchase_exception
 #: model:exception.rule,description:purchase_exception.pol_excep_qty_check
@@ -134,39 +155,41 @@ msgstr "La quantité sur la ligne doit être positive"
 
 #. module: purchase_exception
 #: model:ir.model.fields.selection,name:purchase_exception.selection__exception_rule__model__purchase_order
+#, fuzzy
 msgid "Purchase order"
-msgstr "Bon de Commande"
+msgstr "Commande"
 
 #. module: purchase_exception
 #: model:ir.model.fields.selection,name:purchase_exception.selection__exception_rule__model__purchase_order_line
+#, fuzzy
 msgid "Purchase order line"
-msgstr "Ligne de commande d'achat"
+msgstr "Commande"
 
 #. module: purchase_exception
 #: model:ir.actions.server,name:purchase_exception.ir_cron_test_po_order_except_ir_actions_server
-#: model:ir.cron,cron_name:purchase_exception.ir_cron_test_po_order_except
-#: model:ir.cron,name:purchase_exception.ir_cron_test_po_order_except
 msgid "Purchase: Test Draft Orders Exception"
 msgstr "Achat : Test des exceptions des commandes en brouillon"
 
 #. module: purchase_exception
 #: model:ir.model.fields,field_description:purchase_exception.field_exception_rule__purchase_ids
+#, fuzzy
 msgid "Purchases"
-msgstr "Achats"
+msgstr "Achat"
 
 #. module: purchase_exception
 #: model:exception.rule,name:purchase_exception.pol_excep_qty_check
 msgid "Quantity not positive"
-msgstr "Quantité non positive"
-
-#. module: purchase_exception
-#: model_terms:ir.ui.view,arch_db:purchase_exception.view_order_form
-msgid ""
-"You have an outstanding\n"
-"                    exception to manage:"
 msgstr ""
-"Vous avez une exception\n"
-"                   non résolue à traiter :"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#~ msgid ""
+#~ "You have an outstanding\n"
+#~ "                    exception to manage:"
+#~ msgstr ""
+#~ "Vous avez une exception\n"
+#~ "                   non résolue à traiter :"
 
 #~ msgid "Quantity not negative"
 #~ msgstr "Quantité non négative"

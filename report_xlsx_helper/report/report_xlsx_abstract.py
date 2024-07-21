@@ -38,19 +38,20 @@ class ReportXlsxAbstract(models.AbstractModel):
                 raise UserError(
                     _(
                         "Programming Error:\n\n"
-                        "Excel Sheet name '%s' should not exceed %s characters."
+                        "Excel Sheet name '%(name)s' should not exceed %(max_chars)s "
+                        "characters."
                     )
-                    % (name, max_chars)
+                    % {"name": name, "max_chars": max_chars}
                 )
             special_chars = pattern.findall(name)
             if special_chars:
                 raise UserError(
                     _(
                         "Programming Error:\n\n"
-                        "Excel Sheet name '%s' contains unsupported special "
-                        "characters: '%s'."
+                        "Excel Sheet name '%(name)s' contains unsupported special "
+                        "characters: '%(special_chars)s'."
                     )
-                    % (name, special_chars)
+                    % {"name": name, "special_chars": special_chars}
                 )
         return name
 
@@ -107,11 +108,11 @@ class ReportXlsxAbstract(models.AbstractModel):
         bg_yellow = "#FFFFCC"
         bg_blue = "#CCFFFF"
         num_format = "#,##0.00"
-        num_format_conditional = "{0};[Red]-{0};{0}".format(num_format)
+        num_format_conditional = f"{num_format};[Red]-{num_format};{num_format}"
         pct_format = "#,##0.00%"
-        pct_format_conditional = "{0};[Red]-{0};{0}".format(pct_format)
+        pct_format_conditional = f"{pct_format};[Red]-{pct_format};{pct_format}"
         int_format = "#,##0"
-        int_format_conditional = "{0};[Red]-{0};{0}".format(int_format)
+        int_format_conditional = f"{int_format};[Red]-{int_format};{int_format}"
         date_format = "YYYY-MM-DD"
         theader_grey = dict(theader, bg_color=bg_grey)
         theader_yellow = dict(theader, bg_color=bg_yellow)
@@ -697,7 +698,7 @@ class ReportXlsxAbstract(models.AbstractModel):
                         cell_type = "boolean"
                     elif isinstance(cell_value, str):
                         cell_type = "string"
-                    elif isinstance(cell_value, (int, float)):
+                    elif isinstance(cell_value, int | float):
                         cell_type = "number"
                     elif isinstance(cell_value, datetime):
                         cell_type = "datetime"
@@ -709,10 +710,15 @@ class ReportXlsxAbstract(models.AbstractModel):
                             cell_type = "blank"
                         else:
                             msg = _(
-                                "%s, _write_line : programming error "
+                                "%(__name__)s, _write_line : programming error "
                                 "detected while processing "
-                                "col_specs_section %s, column %s"
-                            ) % (__name__, col_specs_section, col)
+                                "col_specs_section %(col_specs_section)s, "
+                                "column %(col)s"
+                            ) % {
+                                "__name__": __name__,
+                                "col_specs_section": col_specs_section,
+                                "col": col,
+                            }
                             if cell_value:
                                 msg += _(", cellvalue %s") % cell_value
                             raise UserError(msg)

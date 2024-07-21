@@ -20,10 +20,21 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: product_sequence
+#. odoo-python
 #: code:addons/product_sequence/models/product_product.py:0
 #, python-format
 msgid "-copy"
 msgstr "-copie"
+
+#. module: product_sequence
+#: model:ir.model,name:product_sequence.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: product_sequence
+#: model:ir.model,name:product_sequence.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: product_sequence
 #: model:ir.model.fields,field_description:product_sequence.field_product_product__default_code
@@ -45,11 +56,6 @@ msgstr ""
 "catégorie. Si vide, la séquence par défaut sera utilisée."
 
 #. module: product_sequence
-#: model:ir.model,name:product_sequence.model_product_product
-msgid "Product"
-msgstr "Article"
-
-#. module: product_sequence
 #: model:ir.model,name:product_sequence.model_product_category
 msgid "Product Category"
 msgstr "Catégorie d'article"
@@ -58,6 +64,21 @@ msgstr "Catégorie d'article"
 #: model:ir.model.fields,field_description:product_sequence.field_product_category__sequence_id
 msgid "Product Sequence"
 msgstr "Séquence d'article"
+
+#. module: product_sequence
+#: model_terms:ir.ui.view,arch_db:product_sequence.res_config_settings_view_form
+msgid "Product Sequences"
+msgstr ""
+
+#. module: product_sequence
+#: model:ir.model,name:product_sequence.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: product_sequence
+#: model:ir.model,name:product_sequence.model_ir_sequence
+msgid "Sequence"
+msgstr ""
 
 #. module: product_sequence
 #: model:ir.model.fields,help:product_sequence.field_product_product__default_code
@@ -75,3 +96,28 @@ msgid ""
 msgstr ""
 "Ce champ contient les informations relatives à la numérotation des entrées "
 "de ce journal."
+
+#. module: product_sequence
+#: model:ir.model.fields,field_description:product_sequence.field_res_company__use_parent_categories_to_determine_prefix
+#: model:ir.model.fields,field_description:product_sequence.field_res_config_settings__use_parent_categories_to_determine_prefix
+#: model_terms:ir.ui.view,arch_db:product_sequence.res_config_settings_view_form
+msgid "Use parent categories to determine the prefix"
+msgstr ""
+
+#. module: product_sequence
+#: model_terms:ir.ui.view,arch_db:product_sequence.res_config_settings_view_form
+msgid ""
+"Use parent categories to determine the prefix if the category has no "
+"settings for the prefix"
+msgstr ""
+
+#. module: product_sequence
+#: model:ir.model.fields,help:product_sequence.field_res_company__use_parent_categories_to_determine_prefix
+#: model:ir.model.fields,help:product_sequence.field_res_config_settings__use_parent_categories_to_determine_prefix
+msgid ""
+"Use parent categories to determine the prefix if the category has no "
+"settings for the prefix."
+msgstr ""
+
+#~ msgid "Product"
+#~ msgstr "Article"

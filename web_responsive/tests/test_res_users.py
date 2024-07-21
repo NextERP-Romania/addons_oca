@@ -1,13 +1,32 @@
-# Copyright 2018 Alexandre Díaz
+# Copyright 2023 Taras Shabaranskyi
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestResUsers(common.TransactionCase):
-    def test_chatter_position_wr(self):
-        user_public = self.env.ref("base.public_user")
+class TestResUsers(TransactionCase):
+    def test_compute_redirect_home(self):
+        record = self.env["res.users"].create(
+            {
+                "action_id": False,
+                "is_redirect_home": False,
+                "name": "Jeant",
+                "login": "jeant@mail.com",
+                "password": "jeant@mail.com",
+            }
+        )
 
-        self.assertEqual(user_public.chatter_position, "sided")
-        user_public.with_user(user_public).write({"chatter_position": "normal"})
-        self.assertEqual(user_public.chatter_position, "normal")
+        record._compute_redirect_home()
+        self.assertFalse(record.is_redirect_home)
+
+        action_obj = self.env["ir.actions.actions"]
+        record.action_id = action_obj.create(
+            {"name": "Test Action", "type": "ir.actions.act_window"}
+        )
+        record._compute_redirect_home()
+        self.assertFalse(record.is_redirect_home)
+
+        record.action_id = False
+        record.is_redirect_home = True
+        record._compute_redirect_home()
+        self.assertTrue(record.is_redirect_home)

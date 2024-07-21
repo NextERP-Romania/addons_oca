@@ -1,15 +1,21 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import mock
+from unittest import mock
 
-from odoo.tests import SavepointCase
+from odoo import Command
+from odoo.tests import TransactionCase
 
 
-class TestSaleExceptionMultiRecord(SavepointCase):
+class TestSaleExceptionMultiRecord(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.default_pl = cls.env["product.pricelist"].create(
+            {
+                "name": "Public Pricelist",
+            }
+        )
 
     def test_sale_order_exception(self):
         exception_no_sol = self.env.ref("sale_exception.excep_no_sol")
@@ -26,9 +32,7 @@ class TestSaleExceptionMultiRecord(SavepointCase):
                 "partner_invoice_id": partner.id,
                 "partner_shipping_id": partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": p.name,
                             "product_id": p.id,
@@ -38,7 +42,7 @@ class TestSaleExceptionMultiRecord(SavepointCase):
                         },
                     )
                 ],
-                "pricelist_id": self.env.ref("product.list0").id,
+                "pricelist_id": self.default_pl.id,
             }
         )
 
@@ -47,7 +51,7 @@ class TestSaleExceptionMultiRecord(SavepointCase):
                 "partner_id": partner.id,
                 "partner_invoice_id": partner.id,
                 "partner_shipping_id": partner.id,
-                "pricelist_id": self.env.ref("product.list0").id,
+                "pricelist_id": self.default_pl.id,
             }
         )
 
@@ -57,9 +61,7 @@ class TestSaleExceptionMultiRecord(SavepointCase):
                 "partner_invoice_id": partner.id,
                 "partner_shipping_id": partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": p.name,
                             "product_id": p.id,
@@ -69,15 +71,17 @@ class TestSaleExceptionMultiRecord(SavepointCase):
                         },
                     )
                 ],
-                "pricelist_id": self.env.ref("product.list0").id,
+                "pricelist_id": self.default_pl.id,
             }
         )
 
         orders = so1 + so2 + so3
+        # ensure init state
         for order in orders:
-            # ensure init state
             self.assertTrue(order.state == "draft")
             self.assertTrue(len(order.exception_ids) == 0)
+        self.assertFalse(so1.order_line[0].is_exception_danger)
+        self.assertFalse(so3.order_line[0].is_exception_danger)
 
         self.env["sale.order"].test_all_draft_orders()
 
@@ -85,6 +89,7 @@ class TestSaleExceptionMultiRecord(SavepointCase):
 
         self.assertTrue(so1.state == "draft")
         self.assertTrue(len(so1.exception_ids) == 0)
+        self.assertFalse(so1.order_line[0].is_exception_danger)
 
         self.assertTrue(so2.state == "draft")
         self.assertTrue(exception_no_sol in so2.exception_ids)
@@ -100,6 +105,7 @@ class TestSaleExceptionMultiRecord(SavepointCase):
                 "</ul>"
             ),
         )
+        self.assertTrue(so3.order_line[0].is_exception_danger)
 
         # test return value of detect_exception()
 
