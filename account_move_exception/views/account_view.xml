@@ -58,7 +58,7 @@
                     name="exception_ids"
                     widget="many2many_tags"
                     readonly="True"
-                    invisible="exception_ids == []"
+                    invisible="not exception_ids"
                 />
             </xpath>
         </field>
