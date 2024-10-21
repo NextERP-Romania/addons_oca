@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     <!-- Test Purchase Exceptions Scheduler-->
     <record model="ir.cron" forcecreate="True" id="ir_cron_test_acc_move_except">
