@@ -16,17 +16,11 @@ Purchase Order Supplierinfo Update
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpurchase--workflow-lightgray.png?logo=github
-    :target: https://github.com/OCA/purchase-workflow/tree/17.0/purchase_order_supplierinfo_update
-    :alt: OCA/purchase-workflow
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/purchase-workflow-17-0/purchase-workflow-17-0-purchase_order_supplierinfo_update
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/purchase-workflow&target_branch=17.0
-    :alt: Try me on Runboat
+.. |badge3| image:: https://img.shields.io/badge/github-NextERP--Romania%2Fnexterp--base-lightgray.png?logo=github
+    :target: https://github.com/NextERP-Romania/nexterp-base/tree/17.0/purchase_order_supplierinfo_update
+    :alt: NextERP-Romania/nexterp-base
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3|
 
 This module extends the functionality of purchase to allow the price of
 the supplier-info to be updated automatically for each product of the a
@@ -58,16 +52,16 @@ To use this module, you need to:
 Known issues / Roadmap
 ======================
 
--  Refactor that module to share algorithm with similar module
-   account_invoice_supplierinfo_update.
+- Refactor that module to share algorithm with similar module
+  account_invoice_supplierinfo_update.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/purchase-workflow/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/NextERP-Romania/nexterp-base/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/purchase-workflow/issues/new?body=module:%20purchase_order_supplierinfo_update%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/NextERP-Romania/nexterp-base/issues/new?body=module:%20purchase_order_supplierinfo_update%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -82,35 +76,25 @@ Authors
 Contributors
 ------------
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Ernesto Tejeda
-   -  Carlos Dauden
+  - Ernesto Tejeda
+  - Carlos Dauden
 
--  Daniel Reis <dreis@opensourceintegrators.com>, `Open Source
-   Integrators <https://www.opensourceintegrators.eu>`__:
+- Daniel Reis <dreis@opensourceintegrators.com>, `Open Source
+  Integrators <https://www.opensourceintegrators.eu>`__:
 
 Maintainers
 -----------
-
-This module is maintained by the OCA.
-
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
 
 .. |maintainer-ernestotejeda| image:: https://github.com/ernestotejeda.png?size=40px
     :target: https://github.com/ernestotejeda
     :alt: ernestotejeda
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current maintainer:
 
 |maintainer-ernestotejeda| 
 
-This module is part of the `OCA/purchase-workflow <https://github.com/OCA/purchase-workflow/tree/17.0/purchase_order_supplierinfo_update>`_ project on GitHub.
+This module is part of the `NextERP-Romania/nexterp-base <https://github.com/NextERP-Romania/nexterp-base/tree/17.0/purchase_order_supplierinfo_update>`_ project on GitHub.
 
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.
