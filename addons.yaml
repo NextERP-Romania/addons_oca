@@ -1,0 +1,81 @@
+account-analytic:
+  - stock_analytic
+  - stock_picking_analytic
+account-invoicing:
+  - account_move_exception
+account-invoice-reporting:
+  - account_comment_template
+account-financial-reporting:
+  - account_financial_report
+account-reconcile:
+  - account_statement_base
+bank-statement-import:
+  - account_statement_import_base
+  - account_statement_import_file
+brand:
+  - brand
+  - product_brand
+commission:
+  - account_commission
+  - commission
+  - commission_formula
+  - sale_commission
+currency:
+  - currency_rate_update
+delivery-carrier:
+  - delivery_state
+hr:
+  - hr_employee_firstname
+margin-analysis:
+  - sale_margin_security
+partner-contact:
+  - base_location
+  - base_location_geonames_import
+product-attribute:
+  - product_code_unique
+  - product_sequence
+  - product_supplierinfo_for_customer
+  - product_supplierinfo_for_customer_sale
+purchase-workflow:
+  - purchase_exception
+  - purchase_order_supplierinfo_update
+reporting-engine:
+  - base_comment_template
+  - bi_sql_editor
+  - report_qweb_element_page_visibility
+  - report_qweb_pdf_watermark
+  - report_xlsx
+  - report_xlsx_helper
+  - report_xml
+  - sql_export
+  - sql_export_excel
+  - sql_export_mail
+  - sql_request_abstract
+sale-workflow:
+  - sale_exception
+server-brand:
+  - portal_odoo_debranding
+server-tools:
+  - base_exception
+  - base_view_inheritance_extension
+server-ux:
+  - date_range
+  - date_range_account
+social:
+  - mail_activity_board
+  - mail_attach_existing_attachment
+  - mail_debrand
+stock-logistics-warehouse:
+  - stock_exception
+stock-logistics-workflow:
+  - stock_no_negative
+  - stock_owner_restriction
+  - stock_picking_filter_lot
+  - stock_restrict_lot
+web:
+  - web_action_conditionable
+  - web_chatter_position
+  - web_dialog_size
+  - web_refresher
+  - web_responsive
+  - web_tree_many2one_clickable
