@@ -36,6 +36,9 @@ product-attribute:
   - product_sequence
   - product_supplierinfo_for_customer
   - product_supplierinfo_for_customer_sale
+queue:
+  - queue_job
+  - queue_job_cron
 purchase-workflow:
   - purchase_exception
   - purchase_order_supplierinfo_update

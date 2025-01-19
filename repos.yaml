@@ -110,6 +110,14 @@
         - oca 18.0
     target: nexterp 18.0
 
+./queue:
+    remotes:
+        oca: git@github.com:OCA/queue.git
+        nexterp: git@github.com:NextERP-Romania/queue.git
+    merges:
+        - oca 18.0
+    target: nexterp 18.0
+
 ./purchase-workflow:
     remotes:
         oca: git@github.com:OCA/purchase-workflow.git
