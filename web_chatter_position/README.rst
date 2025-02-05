@@ -16,17 +16,11 @@ Chatter Position
 .. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fweb-lightgray.png?logo=github
-    :target: https://github.com/OCA/web/tree/17.0/web_chatter_position
-    :alt: OCA/web
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/web-17-0/web-17-0-web_chatter_position
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/web&target_branch=17.0
-    :alt: Try me on Runboat
+.. |badge3| image:: https://img.shields.io/badge/github-NextERP--Romania%2Fnexterp--base-lightgray.png?logo=github
+    :target: https://github.com/NextERP-Romania/nexterp-base/tree/17.0/web_chatter_position
+    :alt: NextERP-Romania/nexterp-base
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3|
 
 Configurable chatter position from the user preferences.
 
@@ -46,10 +40,10 @@ you can choose between ``auto``, ``bottom`` and ``sided``.
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/web/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/NextERP-Romania/nexterp-base/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/web/issues/new?body=module:%20web_chatter_position%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/NextERP-Romania/nexterp-base/issues/new?body=module:%20web_chatter_position%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -66,30 +60,20 @@ Authors
 Contributors
 ------------
 
--  Hynsys Technologies <hynsystechnologies@gmail.com>
--  Juan Miguel Sánchez Arce <juan.sanchez@camptocamp.com>
--  `Camptocamp <https://www.camptocamp.com>`__
+- Hynsys Technologies <hynsystechnologies@gmail.com>
+- Juan Miguel Sánchez Arce <juan.sanchez@camptocamp.com>
+- `Camptocamp <https://www.camptocamp.com>`__
 
-   -  Iván Todorovich <ivan.todorovich@camptocamp.com>
-   -  Tris Doan <tridm@trobz.com>
+  - Iván Todorovich <ivan.todorovich@camptocamp.com>
+  - Tris Doan <tridm@trobz.com>
 
--  `Alitec Pte Ltd <http://www.alitec.sg>`__
+- `Alitec Pte Ltd <http://www.alitec.sg>`__
 
-   -  Jay Patel <jay@alitec.sg>
+  - Jay Patel <jay@alitec.sg>
 
 Maintainers
 -----------
 
-This module is maintained by the OCA.
+This module is part of the `NextERP-Romania/nexterp-base <https://github.com/NextERP-Romania/nexterp-base/tree/17.0/web_chatter_position>`_ project on GitHub.
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
-
-This module is part of the `OCA/web <https://github.com/OCA/web/tree/17.0/web_chatter_position>`_ project on GitHub.
-
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.
