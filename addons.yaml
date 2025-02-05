@@ -7,6 +7,7 @@ account-invoice-reporting:
   - account_comment_template
 account-financial-reporting:
   - account_financial_report
+  - partner_statement
 account-reconcile:
   - account_statement_base
 bank-statement-import:
