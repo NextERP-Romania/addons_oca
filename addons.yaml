@@ -61,6 +61,7 @@ server-brand:
 server-tools:
   - base_exception
   - base_view_inheritance_extension
+  - session_db
 server-ux:
   - date_range
   - date_range_account
