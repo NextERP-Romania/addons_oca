@@ -61,6 +61,7 @@ server-brand:
 server-tools:
   - base_exception
   - base_view_inheritance_extension
+  - module_auto_update
   - session_db
 server-ux:
   - date_range
