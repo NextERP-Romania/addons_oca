@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-27 17:36+0000\n"
+"PO-Revision-Date: 2025-01-31 16:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: brand
 #: model:ir.model.fields,help:brand.field_res_brand__type
@@ -318,7 +318,7 @@ msgstr "Contatto"
 #. module: brand
 #: model:ir.model.fields,help:brand.field_res_brand__message_bounce
 msgid "Counter of the number of bounced emails for this contact"
-msgstr "Contatore del numero di email respinte per questo contatto"
+msgstr "Contatore del numero di e-mail respinte per questo contatto"
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__country_id
@@ -364,7 +364,7 @@ msgstr "Valuta"
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__property_payment_term_id
 msgid "Customer Payment Terms"
-msgstr "Temini pagamento cliente"
+msgstr "Termini pagamento cliente"
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__customer_rank
@@ -483,6 +483,11 @@ msgid "Has Unreconciled Entries"
 msgstr "Ha entrate non riconciliate"
 
 #. module: brand
+#: model:ir.model.fields,field_description:brand.field_res_brand__hide_peppol_fields
+msgid "Hide Peppol Fields"
+msgstr "Nascondi campi Peppol"
+
+#. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__id
 msgid "ID"
 msgstr "ID"
@@ -574,6 +579,11 @@ msgstr "Fattura"
 #: model:ir.model.fields,field_description:brand.field_res_brand__invoice_ids
 msgid "Invoices"
 msgstr "Fatture"
+
+#. module: brand
+#: model:ir.model.fields,field_description:brand.field_res_brand__is_coa_installed
+msgid "Is Coa Installed"
+msgstr "Coa è installato"
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__message_is_follower
@@ -684,7 +694,7 @@ msgstr "Tipo prossima attività"
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__email_normalized
 msgid "Normalized Email"
-msgstr "Email normalizzata"
+msgstr "E-mail normalizzata"
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__comment
@@ -744,7 +754,7 @@ msgstr "Partner con lo stesso registro azienda"
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__same_vat_partner_id
 msgid "Partner with same Tax ID"
-msgstr "Fornitori con lo stesso ID fiscale"
+msgstr "Fornitore con la stessa partita IVA"
 
 #. module: brand
 #: model_terms:ir.ui.view,arch_db:brand.res_brand_form_view
@@ -836,7 +846,7 @@ msgstr "Ordine di vendita"
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__team_id
 msgid "Sales Team"
-msgstr "Team vendite"
+msgstr "Team di vendita"
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__sale_warn
@@ -1007,7 +1017,7 @@ msgid ""
 "The registry number of the company. Use it if it is different from the Tax "
 "ID. It must be unique across all partners of a same country"
 msgstr ""
-"Il numero registro dell'azienda. Utilizzare se è diverso dall'ID fiscale. "
+"Il numero registro dell'azienda. Utilizzare se è diverso dalla partita IVA. "
 "Deve essere univoco tra tutti i partner della stessa nazione"
 
 #. module: brand
@@ -1034,8 +1044,8 @@ msgid ""
 "This field is used to search on email address as the primary email field can "
 "contain more than strictly an email address."
 msgstr ""
-"Questo campo viene utilizzato per la ricerca degli indirizzi email, come "
-"campo principale dell'email può contenere più indirizzi."
+"Questo campo viene utilizzato per la ricerca degli indirizzi e-mail, come "
+"campo principale dell'e-mail può contenere più indirizzi."
 
 #. module: brand
 #: model:ir.model.fields,help:brand.field_res_brand__property_supplier_payment_term_id
@@ -1087,7 +1097,7 @@ msgstr "Totale fatturato"
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__debit
 msgid "Total Payable"
-msgstr "Dabito totale"
+msgstr "Debito totale"
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__credit
@@ -1102,7 +1112,7 @@ msgstr "Ammontare totale dovuto da questo cliente."
 #. module: brand
 #: model:ir.model.fields,help:brand.field_res_brand__debit
 msgid "Total amount you have to pay to this vendor."
-msgstr "Ammontare totale dovuto a questo fonritore."
+msgstr "Ammontare totale dovuto a questo fornitore."
 
 #. module: brand
 #: model:ir.model.fields,help:brand.field_res_brand__activity_exception_decoration
@@ -1121,7 +1131,7 @@ msgstr ""
 #. module: brand
 #: model:ir.model.fields,help:brand.field_res_brand__barcode
 msgid "Use a barcode to identify this contact."
-msgstr "Utilizza un barcode per identificare questo contatto."
+msgstr "Utilizza un codice a barre per identificare questo contatto."
 
 #. module: brand
 #: model:ir.model.fields,field_description:brand.field_res_brand__user_ids

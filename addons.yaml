@@ -29,6 +29,8 @@ hr:
   - hr_employee_firstname
 margin-analysis:
   - sale_margin_security
+multi-company:
+  - mail_multicompany
 partner-contact:
   - base_location
   - base_location_geonames_import
@@ -53,7 +55,9 @@ reporting-engine:
   - sql_export_mail
   - sql_request_abstract
 sale-workflow:
+  - product_supplierinfo_for_customer_sale
   - sale_exception
+  - sale_blanket_order
 server-brand:
   - portal_odoo_debranding
 server-tools:
