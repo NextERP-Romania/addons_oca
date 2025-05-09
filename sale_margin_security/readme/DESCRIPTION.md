@@ -1,2 +1,2 @@
-This module allows to restrict the access to sale margin fields to a specific security
-group of users.
+This module lets you limit who can see or edit sale margin data within
+sale orders.
