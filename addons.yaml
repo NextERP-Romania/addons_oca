@@ -7,6 +7,7 @@ account-invoice-reporting:
   - account_comment_template
 account-financial-reporting:
   - account_financial_report
+  - partner_statement
 account-reconcile:
   - account_statement_base
 bank-statement-import:
@@ -26,6 +27,8 @@ delivery-carrier:
   - delivery_state
 hr:
   - hr_employee_firstname
+mail:
+  - mail_debrand
 margin-analysis:
   - sale_margin_security
 partner-contact:
@@ -33,6 +36,7 @@ partner-contact:
   - base_location_geonames_import
 product-attribute:
   - product_code_unique
+  - product_cost_security
   - product_sequence
   - product_supplierinfo_for_customer
   - product_supplierinfo_for_customer_sale
@@ -70,7 +74,6 @@ server-ux:
 social:
   - mail_activity_board
   - mail_attach_existing_attachment
-  - mail_debrand
 stock-logistics-warehouse:
   - stock_exception
 stock-logistics-workflow:
@@ -85,3 +88,5 @@ web:
   - web_refresher
   - web_responsive
   - web_tree_many2one_clickable
+website:
+  - website_odoo_debranding

@@ -86,6 +86,14 @@
         - oca 18.0
     target: nexterp 18.0
 
+./mail:
+    remotes:
+        oca: git@github.com:OCA/mail.git
+        nexterp: git@github.com:NextERP-Romania/mail.git
+    merges:
+        - oca 18.0
+    target: nexterp 18.0
+
 ./margin-analysis:
     remotes:
         oca: git@github.com:OCA/margin-analysis.git
@@ -194,6 +202,14 @@
     remotes:
         oca: git@github.com:OCA/web.git
         nexterp: git@github.com:NextERP-Romania/web.git
+    merges:
+        - oca 18.0
+    target: nexterp 18.0
+
+./website:
+    remotes:
+        oca: git@github.com:OCA/website.git
+        nexterp: git@github.com:NextERP-Romania/website.git
     merges:
         - oca 18.0
     target: nexterp 18.0
