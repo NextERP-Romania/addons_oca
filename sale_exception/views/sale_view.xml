@@ -78,7 +78,7 @@
         <field name="inherit_id" ref="sale.view_order_tree" />
         <field name="arch" type="xml">
             <field name="state" position="after">
-                <field name="main_exception_id" />
+                <field name="main_exception_id"  optional="hide" />
             </field>
         </field>
     </record>
@@ -88,7 +88,7 @@
         <field name="inherit_id" ref="sale.view_quotation_tree" />
         <field name="arch" type="xml">
             <field name="state" position="after">
-                <field name="main_exception_id" />
+                <field name="main_exception_id" optional="hide" />
             </field>
         </field>
     </record>
