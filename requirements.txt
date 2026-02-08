@@ -4,3 +4,4 @@ lxml
 openpyxl
 xlrd
 xlsxwriter
+odoo-test-helper
