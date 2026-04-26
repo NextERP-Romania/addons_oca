@@ -60,7 +60,7 @@ class PartnerStatementXlsxCommon(TransactionCase):
         self.data = {
             "company_id": self.company.id,
             "partner_ids": [self.partner.id],
-            "account_type": "receivable",
+            "account_type": "asset_receivable",
             "excluded_accounts_ids": [],
             "show_only_overdue": False,
             "aging_type": "normal",

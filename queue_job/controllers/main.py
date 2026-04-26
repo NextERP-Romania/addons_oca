@@ -6,14 +6,15 @@ import logging
 import random
 import time
 import traceback
+from contextlib import contextmanager
 from io import StringIO
 
 from psycopg2 import OperationalError, errorcodes
 from werkzeug.exceptions import BadRequest, Forbidden
 
 from odoo import SUPERUSER_ID, api, http
-from odoo.modules.registry import Registry
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
+from odoo.tools import config
 
 from ..delay import chain, group
 from ..exception import FailedJobError, RetryableJobError
@@ -24,6 +25,31 @@ _logger = logging.getLogger(__name__)
 PG_RETRY = 5  # seconds
 
 DEPENDS_MAX_TRIES_ON_CONCURRENCY_FAILURE = 5
+
+
+@contextmanager
+def _prevent_commit(cr):
+    """Context manager to prevent commits on a cursor.
+
+    Commiting while the job is not finished would release the job lock, causing
+    it to be started again by the dead jobs requeuer.
+    """
+
+    def forbidden_commit(*args, **kwargs):
+        raise RuntimeError(
+            "Commit is forbidden in queue jobs. "
+            'You may want to enable the "Allow Commit" option on the Job '
+            "Function. Alternatively, if the current job is a cron running as "
+            "queue job, you can modify it to run as a normal cron. More details on: "
+            "https://github.com/OCA/queue/wiki/Upgrade-warning:-commits-inside-jobs"
+        )
+
+    original_commit = cr.commit
+    cr.commit = forbidden_commit
+    try:
+        yield
+    finally:
+        cr.commit = original_commit
 
 
 class RunJobController(http.Controller):
@@ -69,18 +95,26 @@ class RunJobController(http.Controller):
     def _try_perform_job(cls, env, job):
         """Try to perform the job, mark it done and commit if successful."""
         _logger.debug("%s started", job)
-        job.perform()
-        # Triggers any stored computed fields before calling 'set_done'
-        # so that will be part of the 'exec_time'
-        env.flush_all()
-        job.set_done()
-        job.store()
-        env.flush_all()
-        env.cr.commit()
+        # TODO refactor, the relation between env and job.env is not clear
+        assert env.cr is job.env.cr
+        with _prevent_commit(env.cr):
+            job.perform()
+            # Triggers any stored computed fields before calling 'set_done'
+            # so that will be part of the 'exec_time'
+            env.flush_all()
+            job.set_done()
+            job.store()
+            env.flush_all()
+        if not config["test_enable"]:
+            env.cr.commit()
         _logger.debug("%s done", job)
 
     @classmethod
     def _enqueue_dependent_jobs(cls, env, job):
+        if not job.should_check_dependents():
+            return
+
+        _logger.debug("%s enqueue depends started", job)
         tries = 0
         while True:
             try:
@@ -109,13 +143,13 @@ class RunJobController(http.Controller):
                 time.sleep(wait_time)
             else:
                 break
+        _logger.debug("%s enqueue depends done", job)
 
     @classmethod
     def _runjob(cls, env: api.Environment, job: Job) -> None:
         def retry_postpone(job, message, seconds=None):
             job.env.clear()
-            with Registry(job.env.cr.dbname).cursor() as new_cr:
-                job.env = api.Environment(new_cr, SUPERUSER_ID, {})
+            with job.in_temporary_env():
                 job.postpone(result=message, seconds=seconds)
                 job.set_pending(reset_retry=False)
                 job.store()
@@ -140,6 +174,7 @@ class RunJobController(http.Controller):
             # traceback in the logs we should have the traceback when all
             # retries are exhausted
             env.cr.rollback()
+            return
 
         except (FailedJobError, Exception) as orig_exception:
             buff = StringIO()
@@ -147,17 +182,14 @@ class RunJobController(http.Controller):
             traceback_txt = buff.getvalue()
             _logger.error(traceback_txt)
             job.env.clear()
-            with Registry(job.env.cr.dbname).cursor() as new_cr:
-                job.env = job.env(cr=new_cr)
+            with job.in_temporary_env():
                 vals = cls._get_failure_values(job, traceback_txt, orig_exception)
                 job.set_failed(**vals)
                 job.store()
                 buff.close()
             raise
 
-        _logger.debug("%s enqueue depends started", job)
         cls._enqueue_dependent_jobs(env, job)
-        _logger.debug("%s enqueue depends done", job)
 
     @classmethod
     def _get_failure_values(cls, job, traceback_txt, orig_exception):
@@ -201,6 +233,8 @@ class RunJobController(http.Controller):
         size=1,
         failure_rate=0,
         job_duration=0,
+        commit_within_job=False,
+        failure_retry_seconds=0,
     ):
         if not http.request.env.user.has_group("base.group_erp_manager"):
             raise Forbidden(http.request.env._("Access Denied"))
@@ -238,6 +272,12 @@ class RunJobController(http.Controller):
             except ValueError:
                 max_retries = None
 
+        if failure_retry_seconds is not None:
+            try:
+                failure_retry_seconds = int(failure_retry_seconds)
+            except ValueError:
+                failure_retry_seconds = 0
+
         if size == 1:
             return self._create_single_test_job(
                 priority=priority,
@@ -246,6 +286,8 @@ class RunJobController(http.Controller):
                 description=description,
                 failure_rate=failure_rate,
                 job_duration=job_duration,
+                commit_within_job=commit_within_job,
+                failure_retry_seconds=failure_retry_seconds,
             )
 
         if size > 1:
@@ -257,6 +299,8 @@ class RunJobController(http.Controller):
                 description=description,
                 failure_rate=failure_rate,
                 job_duration=job_duration,
+                commit_within_job=commit_within_job,
+                failure_retry_seconds=failure_retry_seconds,
             )
         return ""
 
@@ -269,6 +313,8 @@ class RunJobController(http.Controller):
         size=1,
         failure_rate=0,
         job_duration=0,
+        commit_within_job=False,
+        failure_retry_seconds=0,
     ):
         delayed = (
             http.request.env["queue.job"]
@@ -278,7 +324,12 @@ class RunJobController(http.Controller):
                 channel=channel,
                 description=description,
             )
-            ._test_job(failure_rate=failure_rate, job_duration=job_duration)
+            ._test_job(
+                failure_rate=failure_rate,
+                job_duration=job_duration,
+                commit_within_job=commit_within_job,
+                failure_retry_seconds=failure_retry_seconds,
+            )
         )
         return f"job uuid: {delayed.db_record().uuid}"
 
@@ -293,6 +344,8 @@ class RunJobController(http.Controller):
         description="Test job",
         failure_rate=0,
         job_duration=0,
+        commit_within_job=False,
+        failure_retry_seconds=0,
     ):
         model = http.request.env["queue.job"]
         current_count = 0
@@ -315,7 +368,12 @@ class RunJobController(http.Controller):
                         max_retries=max_retries,
                         channel=channel,
                         description=f"{description} #{current_count}",
-                    )._test_job(failure_rate=failure_rate, job_duration=job_duration)
+                    )._test_job(
+                        failure_rate=failure_rate,
+                        job_duration=job_duration,
+                        commit_within_job=commit_within_job,
+                        failure_retry_seconds=failure_retry_seconds,
+                    )
                 )
 
             grouping = random.choice(possible_grouping_methods)

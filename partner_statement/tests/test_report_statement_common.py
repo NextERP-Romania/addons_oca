@@ -165,7 +165,7 @@ class TestReportStatementCommon(TransactionCase):
                 "partner_ids": [self.partner1.id, self.partner2.id],
                 "date_start": self.date_start.strftime("%Y-%m-%d"),
                 "date_end": self.date_end.strftime("%Y-%m-%d"),
-                "account_type": "receivable",
+                "account_type": "asset_receivable",
                 "excluded_accounts_ids": [],
                 "show_only_overdue": False,
                 "aging_type": "days",

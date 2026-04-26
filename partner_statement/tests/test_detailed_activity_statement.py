@@ -37,7 +37,7 @@ class TestDetailedActivityStatement(TransactionCase):
             ending_date="2024-03-31",
             currency="USD",
             line_type="prior_lines",
-            account_type="receivable",
+            account_type="asset_receivable",
         )
 
         self.assertEqual(
@@ -53,7 +53,7 @@ class TestDetailedActivityStatement(TransactionCase):
             ending_date="2024-04-30",
             currency="EUR",
             line_type="ending_lines",
-            account_type="payable",
+            account_type="liability_payable",
         )
 
         self.assertEqual(

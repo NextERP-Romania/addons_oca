@@ -31,7 +31,11 @@ class TrialBalanceReport(models.AbstractModel):
         if account_ids:
             accounts_domain += [("id", "in", account_ids)]
         domain = [("date", "<", date_from)]
-        accounts = self.env["account.account"].search(accounts_domain)
+        accounts = (
+            self.env["account.account"]
+            .with_context(active_test=False)
+            .search(accounts_domain)
+        )
         domain += [("account_id", "in", accounts.ids)]
         if company_id:
             domain += [("company_id", "=", company_id)]
@@ -71,7 +75,11 @@ class TrialBalanceReport(models.AbstractModel):
         if account_ids:
             accounts_domain += [("id", "in", account_ids)]
         domain = [("date", "<", date_from), ("date", ">=", fy_start_date)]
-        accounts = self.env["account.account"].search(accounts_domain)
+        accounts = (
+            self.env["account.account"]
+            .with_context(active_test=False)
+            .search(accounts_domain)
+        )
         domain += [("account_id", "in", accounts.ids)]
         if company_id:
             domain += [("company_id", "=", company_id)]
@@ -149,7 +157,11 @@ class TrialBalanceReport(models.AbstractModel):
         if account_ids:
             accounts_domain += [("id", "in", account_ids)]
         domain = [("date", "<", fy_start_date)]
-        accounts = self.env["account.account"].search(accounts_domain)
+        accounts = (
+            self.env["account.account"]
+            .with_context(active_test=False)
+            .search(accounts_domain)
+        )
         domain += [("account_id", "in", accounts.ids)]
         if company_id:
             domain += [("company_id", "=", company_id)]
@@ -379,13 +391,16 @@ class TrialBalanceReport(models.AbstractModel):
                 total_amount, tb, acc_id, prt_id, foreign_currency
             )
         # sort on partner_name
+        # total_amount is a dictionary by account id that contains direct totalized
+        # values for that account (credit, debit, balance...), but also other integer
+        # keys that represents partner ids with the detail of each of them, and one
+        # of the partner id keys is 0 for those with no partner
         for acc_id, total_data in total_amount.items():
             tmp_list = sorted(
                 total_data.items(),
-                key=lambda x: isinstance(x[0], int)
-                and isinstance(x[1], dict)
-                and x[1]["partner_name"]
-                or x[0],
+                key=lambda x: ("\xff" if not x[0] else x[1]["partner_name"])
+                if isinstance(x[0], int)
+                else "!",  # ~ is the last ASCII printable char, and ! the first
             )
             total_amount[acc_id] = {}
             for key, value in tmp_list:
@@ -443,7 +458,11 @@ class TrialBalanceReport(models.AbstractModel):
             # If explicit list of accounts is provided,
             # don't include unaffected earnings account
             unaffected_earnings_account = False
-        accounts = self.env["account.account"].search(accounts_domain)
+        accounts = (
+            self.env["account.account"]
+            .with_context(active_test=False)
+            .search(accounts_domain)
+        )
         tb_initial_acc = []
         for account in accounts:
             tb_initial_acc.append(
@@ -766,7 +785,11 @@ class TrialBalanceReport(models.AbstractModel):
 
     def _get_groups_data(self, accounts_data, total_amount, foreign_currency):
         accounts_ids = list(accounts_data.keys())
-        accounts = self.env["account.account"].browse(accounts_ids)
+        accounts = (
+            self.env["account.account"]
+            .with_context(active_test=False)
+            .browse(accounts_ids)
+        )
         account_group_relation = {}
         for account in accounts:
             accounts_data[account.id]["complete_code"] = (

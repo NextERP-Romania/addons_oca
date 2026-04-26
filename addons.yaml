@@ -27,8 +27,6 @@ delivery-carrier:
   - delivery_state
 hr:
   - hr_employee_firstname
-mail:
-  - mail_debrand
 margin-analysis:
   - sale_margin_security
 partner-contact:
@@ -62,7 +60,8 @@ sale-workflow:
   - sale_exception
   - sale_procurement_group_by_line
 server-brand:
-  - portal_odoo_debranding
+  - mail_debranding
+  - portal_debranding
 server-tools:
   - base_exception
   - base_view_inheritance_extension
