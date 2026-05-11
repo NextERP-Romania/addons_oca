@@ -56,6 +56,8 @@ reporting-engine:
   - sql_export_excel
   - sql_export_mail
   - sql_request_abstract
+sale-blanket:
+  - sale_blanket_order
 sale-workflow:
   - sale_exception
   - sale_procurement_group_by_line
