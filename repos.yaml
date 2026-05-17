@@ -102,6 +102,14 @@
         - oca 19.0
     target: nexterp 19.0
 
+./multi-company:
+    remotes:
+        oca: git@github.com:OCA/multi-company.git
+        nexterp: git@github.com:NextERP-Romania/multi-company.git
+    merges:
+        - oca 19.0
+    target: nexterp 19.0
+
 ./partner-contact:
     remotes:
         oca: git@github.com:OCA/partner-contact.git

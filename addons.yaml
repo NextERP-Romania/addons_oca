@@ -27,8 +27,12 @@ delivery-carrier:
   - delivery_state
 hr:
   - hr_employee_firstname
+mail:
+  - mail_attach_existing_attachment
 margin-analysis:
   - sale_margin_security
+multi-company:
+  - mail_multicompany
 partner-contact:
   - base_location
   - base_location_geonames_import
@@ -41,6 +45,7 @@ product-attribute:
 queue:
   - queue_job
   - queue_job_cron
+  - queue_job_cron_jobrunner
 purchase-workflow:
   - purchase_exception
   - purchase_order_supplierinfo_update
