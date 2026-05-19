@@ -40,8 +40,7 @@ product-attribute:
   - product_code_unique
   - product_cost_security
   - product_sequence
-  - product_supplierinfo_for_customer
-  - product_supplierinfo_for_customer_sale
+  - product_customerinfo
 queue:
   - queue_job
   - queue_job_cron
@@ -66,6 +65,7 @@ sale-blanket:
 sale-workflow:
   - sale_exception
   - sale_procurement_group_by_line
+  - product_customerinfo_sale
 server-brand:
   - mail_debranding
   - portal_debranding
