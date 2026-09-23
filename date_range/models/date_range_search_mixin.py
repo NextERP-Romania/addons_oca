@@ -61,15 +61,14 @@ class DateRangeSearchMixin(models.AbstractModel):
         return domain
 
     @api.model
-    def get_view(self, view_id=None, view_type="form", **options):
+    def _get_view(self, view_id=None, view_type="form", **options):
         """Inject the dummy Many2one field in the search view"""
-        result = super().get_view(view_id=view_id, view_type=view_type, **options)
+        root, view = super()._get_view(view_id=view_id, view_type=view_type, **options)
         if view_type != "search":
-            return result
-        root = etree.fromstring(result["arch"])
+            return root, view
         if root.xpath("//field[@name='date_range_search_id']"):
             # Field was inserted explicitely
-            return result
+            return root, view
         separator = etree.Element("separator")
         field = etree.Element(
             "field",
@@ -83,11 +82,9 @@ class DateRangeSearchMixin(models.AbstractModel):
             groups[0].addprevious(separator)
             groups[0].addprevious(field)
         else:
-            search = root.xpath("/search")
-            search[0].append(separator)
-            search[0].append(field)
-        result["arch"] = etree.tostring(root, encoding="unicode")
-        return result
+            root.append(separator)
+            root.append(field)
+        return root, view
 
     @api.model
     def get_views(self, views, options=None):
